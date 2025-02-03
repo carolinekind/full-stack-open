@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Title from './Title'
 
 const App = () => {
   const anecdotes = [
@@ -16,6 +17,7 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
 
+ 
 
   const handleNextClick = () => {
     let newSelect = Math.floor((Math.random() * anecdotes.length) + 0)
@@ -29,14 +31,28 @@ const App = () => {
 
   }
 
+  const maxVotes =  Math.max(...votes)
+  const maxVoteIndex = votes.indexOf(maxVotes)
+  console.log(anecdotes[maxVoteIndex])
+
+
   return (
     <>
+      <Title text="Anecdote of the Day"/>
        <div> 
         {anecdotes[selected]}
       </div>
       <p> has {votes[selected]} votes</p>
       <button style={{ margin: 4 }} onClick={handleVoteClick}>Vote</button>
       <button onClick={handleNextClick}>Next Anecdote</button>
+
+      <Title text="Anecdote with most Votes"/>
+      <div> 
+        {anecdotes[maxVoteIndex]}
+      </div>
+      <p> has {maxVotes} votes</p>
+
+
     </>
      
   )
